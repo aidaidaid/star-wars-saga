@@ -1,0 +1,55 @@
+.poster{
+    width: 100%;
+    max-width: 100%;
+    max-height: 1080px;
+    /* background-image: url('../../assets/characters.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-size: 100% auto; */
+}
+
+.characters {
+    display: flex;
+    /* width: 100vw; */
+    flex-wrap: wrap;
+    margin: 5%;
+    justify-content: space-between;
+}
+
+.character {
+    width: 25%;
+    color: white; 
+    margin-bottom: 8px;
+}
+
+.characterName {
+    color: white; 
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.characterName:hover {
+    color: yellow
+}
+
+@media screen and (max-width: 750px) {
+  .character {
+    width: 30%;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .character {
+    width: 35%;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .character {
+    width: 100%;
+  }
+
+  .characters {
+    text-align: center;
+  }
+}

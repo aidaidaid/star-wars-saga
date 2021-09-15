@@ -1,0 +1,15 @@
+.container {
+    margin: 20px;
+    background-image: url('../../assets/main-photo.png');
+    background-color: black;
+    display: flex;
+    /* flex-direction: column; */
+    /* justify-content: center; */
+    /* align-items: center; */
+    /* width: 100vw; */
+    /* height: 400px; */
+    height: 789px;
+    background-repeat: no-repeat;
+    /*background-size: cover; */
+    background-size: 100% auto;
+}
