@@ -13,10 +13,14 @@ const Header = () => {
                 <Link to='/'>Home</Link>
                 <Link to='/characters'>Characters</Link>
                 <Link to='/planets'>Planets</Link>
+                <Link to='/films'>Films</Link>
+                <Link to='/species'>Species</Link>
+                <Link to='/vehicles'>Vehicles</Link>
+                <Link to='/starships'>Starships</Link>
             </nav>
-            <input className='header_input' placeholder="Search"
+            {/* <input className='header_input' placeholder="Search"
             // onChange={(e) => setSearchInput(e.target.value)}
-            />
+            /> */}
         </header>
     )
 }

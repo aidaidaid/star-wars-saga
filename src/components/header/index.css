@@ -37,3 +37,9 @@ nav *:hover {
     margin: 20px;
     line-height: 2em;
 }
+
+@media screen and (max-width: 850px) {
+  header a{
+    font-size: 14x;
+}
+}

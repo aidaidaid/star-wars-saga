@@ -1,0 +1,11 @@
+.characterInfo {
+    margin: 5%;    
+}
+
+.characterInfo p {
+    color: white;
+}
+
+.characterNameInline {
+    margin-right: 5px;
+}
