@@ -1,26 +1,20 @@
 import React from "react";
-import {Link} from 'react-router-dom'
+import {NavLink} from 'react-router-dom'
 import '../header/index.css';
-// import logo from '../../assets/darth-vader.svg'
 
 const Header = () => {
 
     return (
         <header>
-            {/* <img src={logo} className='logo' alt='logo'></img> */}
- 
             <nav>
-                <Link to='/'>Home</Link>
-                <Link to='/characters'>Characters</Link>
-                <Link to='/planets'>Planets</Link>
-                <Link to='/films'>Films</Link>
-                <Link to='/species'>Species</Link>
-                <Link to='/vehicles'>Vehicles</Link>
-                <Link to='/starships'>Starships</Link>
+                <NavLink exact to='/' activeClassName='active'>Home</NavLink>
+                <NavLink to='/characters' activeClassName='active'>Characters</NavLink>
+                <NavLink to='/planets' activeClassName='active'>Planets</NavLink>
+                <NavLink to='/films' activeClassName='active'>Films</NavLink>
+                <NavLink to='/species' activeClassName='active'>Species</NavLink>
+                <NavLink to='/vehicles' activeClassName='active'>Vehicles</NavLink>
+                <NavLink to='/starships' activeClassName='active'>Starships</NavLink>
             </nav>
-            {/* <input className='header_input' placeholder="Search"
-            // onChange={(e) => setSearchInput(e.target.value)}
-            /> */}
         </header>
     )
 }

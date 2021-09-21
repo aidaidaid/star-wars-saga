@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import '../../characters/characterCards/index.css';
-import {Link} from "react-router-dom";
+import '../../../index.css';
 
 const PlanetCards = ({ charactersInfo, match, location }) => {
     const [planetInfo, setPlanetInfo] = useState([]);
@@ -53,7 +52,7 @@ const PlanetCards = ({ charactersInfo, match, location }) => {
 
     return ( 
         
-        <div className='characterInfo'>
+        <div className='info'>
             <p>Name: {planetInfo.name}</p>
             <p>Rotation period: {planetInfo.rotation_period}</p>
             <p>Orbital period: {planetInfo.orbital_period}</p>
@@ -65,22 +64,17 @@ const PlanetCards = ({ charactersInfo, match, location }) => {
             <p>Population: {planetInfo.population}</p>
             <p>Residents: <span>{planetResidents?.map((item, index)=>{
                 if (index == planetResidents.length-1) {
-                return <span key={index} className='character'>
-                    <Link className='characterName characterNameInline' to={`/characters/`+`${index}`}>{item}</Link></span>
+                    return <span key={index} className='character'>{item}</span>
                 } else {
-                    return <span key={index} className='character'>
-                        <Link className='characterName characterNameInline' to={`/characters/`+`${index}`}>{item+','}</Link></span>
+                    return <span key={index} className='character'>{item+', '}</span>
                 }
             })
             }</span></p>
-
             <p>Films: <span>{planetFilms?.map((item, index)=>{
                 if (index == planetFilms.length-1) {
-                return <span key={index} className='character'>
-                    <Link className='characterName characterNameInline' to={`/characters/`+`${index}`}>{item}</Link></span>
+                    return <span key={index} className='character'>{item}</span>
                 } else {
-                    return <span key={index} className='character'>
-                        <Link className='characterName characterNameInline' to={`/characters/`+`${index}`}>{item+','}</Link></span>
+                    return <span key={index} className='character'>{item+', '}</span>
                 }
             })
             }</span></p>

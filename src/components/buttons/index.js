@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
-import '../characters/index.css';
+import React from "react";
+import '../../index.css';
+
 
 const Buttons = ({myArray, urlId, setUrlId}) => {
 

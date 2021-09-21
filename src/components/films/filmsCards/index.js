@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import '../../characters/characterCards/index.css';
-import {Link} from "react-router-dom";
+import '../../../index.css';
+import { insertData } from "../../../services";
 
-const FilmCards = ({ charactersInfo, match, location }) => {
+const FilmCards = ({match}) => {
     const [filmInfo, setFilmInfo] = useState([]);
     const [filmCharacters, setFilmCharacters] = useState([]);
     const [filmCharactersUrl, setFilmCharactersUrl] = useState([]);
@@ -82,49 +82,17 @@ const FilmCards = ({ charactersInfo, match, location }) => {
 
     return ( 
         
-        <div className='characterInfo'>
+        <div className='info'>
             <p>Title: {filmInfo.title}</p>
             <p>Episode: {filmInfo.episode_id}</p>
             <p>Opening crawl: {filmInfo.opening_crawl}</p>
             <p>Director: {filmInfo.director}</p>
             <p>Producer: {filmInfo.producer}</p>
             <p>Release date: {filmInfo.release_date}</p>
-            <p>Characters: <span>{filmCharacters?.map((item, index)=>{
-                if (index == filmCharacters.length-1) {
-                return <span key={index} className='character'>
-                    <Link className='characterName characterNameInline' to={`/characters/`+`${index}`}>{item}</Link></span>
-                } else {
-                    return <span key={index} className='character'>
-                        <Link className='characterName characterNameInline' to={`/characters/`+`${index}`}>{item+','}</Link></span>
-                }
-            })
-            }</span></p>
-            <p>Planets: <span>{filmPlanets?.map((item, index)=>{
-                if (index == filmPlanets.length-1) {
-                return <span key={index} className='character'>
-                    <Link className='characterName characterNameInline' to={`/characters/`+`${index}`}>{item}</Link></span>
-                } else {
-                    return <span key={index} className='character'>
-                        <Link className='characterName characterNameInline' to={`/characters/`+`${index}`}>{item+','}</Link></span>
-                }
-            })
-            }</span></p>
-            <p>Vehicles: <span>{filmVehicles?.map((item, index)=>{
-                if (index == filmVehicles.length-1) {
-                return <span key={index} className='character'>{item}</span>
-                } else {
-                    return <span key={index} className='character'>{item+', '}</span>
-                }
-            })
-            }</span></p>
-            <p>Starships: <span>{filmStarships?.map((item, index)=>{
-                if (index == filmStarships.length-1) {
-                return <span key={index} className='character'>{item}</span>
-                } else {
-                    return <span key={index} className='character'>{item+', '}</span>
-                }
-            })
-            }</span></p>
+            <p>Characters: <span>{insertData(filmCharacters)}</span></p>
+            <p>Planets: <span>{insertData(filmPlanets)}</span></p>
+            <p>Vehicles: <span>{insertData(filmVehicles)}</span></p>
+            <p>Starships: <span>{insertData(filmStarships)}</span></p>
         </div>
     )
 }

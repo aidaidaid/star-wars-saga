@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
-import './index.css';
+// import './index.css';
+import '../../../index.css';
 
-const CharacterCards = ({ charactersInfo, match, location }) => {
+
+import { insertData } from "../../../services";
+
+const CharacterCards = ({match}) => {
     let [characterInfo, setCharacterInfo] = useState([]);
     let [charHomeworld, setCharHomeworld] = useState('');
     let [charSpecies, setCharSpecies] = useState('');
@@ -13,11 +17,6 @@ const CharacterCards = ({ charactersInfo, match, location }) => {
     let [characterStarshipsUrl, setCharacterStarshipsUrl] = useState([]);
 
     const getCharacterInfo = async () => {
-        // let increase = 0;
-        // let count = 0;
-        // (localStorage.getItem('urlId') !== 1) ? increase = (localStorage.getItem('urlId') - 1) * 10 : increase = 0;
-        // (parseInt(match?.params?.charId) + increase > 16) ? count = parseInt(match?.params?.charId) + increase + 1 : count = parseInt(match?.params?.charId) + increase;
-        // console.log('adress', `https://swapi.dev/api/people/`+`${parseInt(match?.params?.charId)+increase}`+`/?format=json`)
         let characterInfo = await fetch(`https://swapi.dev/api/people/` + `${match?.params?.charId}` + `/?format=json`).then((data) => data.json()).catch((e) => console.error(e))
         setCharacterInfo(characterInfo);
         setCharacterFilmssUrl(characterInfo?.films);
@@ -84,7 +83,6 @@ const CharacterCards = ({ charactersInfo, match, location }) => {
         }
     },[characterStarshipsUrl])
 
-    // console.log(characterInfo);
     return (
         <div className='characterInfo'>
             <p>Name: {characterInfo.name}</p>
@@ -96,36 +94,12 @@ const CharacterCards = ({ charactersInfo, match, location }) => {
             <p>Birth year: {characterInfo.birth_year}</p>
             <p>Gender: {characterInfo.gender}</p>
             <p>Homeworld: {charHomeworld}</p>
-            <p>Films: <span>{characterFilms?.map((item, index)=>{
-                if (index == characterFilms.length-1) {
-                return <span key={index} className='character'>{item}</span>
-                } else {
-                    return <span key={index} className='character'>{item+', '}</span>
-                }
-            })
-            }</span></p>
+            <p>Films: <span>{insertData(characterFilms)}</span></p>
             <p>Species: {charSpecies}</p>
-            <p>Vehicles: <span>{characterVehicles?.map((item, index)=>{
-                if (index == characterVehicles.length-1) {
-                return <span key={index} className='character'>{item}</span>
-                } else {
-                    return <span key={index} className='character'>{item+', '}</span>
-                }
-            })
-            }</span></p>
-            <p>Starships: <span>{characterStarships?.map((item, index)=>{
-                if (index == characterStarships.length-1) {
-                return <span key={index} className='character'>{item}</span>
-                } else {
-                    return <span key={index} className='character'>{item+', '}</span>
-                }
-            })
-            }</span></p>
+            <p>Vehicles: <span>{insertData(characterVehicles)}</span></p>
+            <p>Starships: <span>{insertData(characterStarships)}</span></p>
         </div>
     )
-    // return characters?.map((item, index) => (
-    //  <div key={index} className='character'>{item?.name}</div>
-    // ))
 }
 
 export default CharacterCards

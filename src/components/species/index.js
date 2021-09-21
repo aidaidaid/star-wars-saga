@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import '../characters/index.css';
-import photoOfFilms from '../../assets/films.jpg';
+import '../../index.css';
 import {Link} from "react-router-dom";
 import Buttons from "../buttons";
 
@@ -29,38 +28,39 @@ const Species = ({match}) => {
         })
     }, [searchInput])
 
-        return (
-            <main>
-                <img className='poster' src={photoOfFilms} alt="Logo"/>;
-                <div className='characters'>
-                
+    return (
+        <section>
+            <div className='poster speciesImg'/>
+            <div className='transparentBlock'>
                 <div className='search-bar'>
                     <input onChange={e=>setSearchInput(e.target.value)} type='text' placeholder='Search'/>
                 </div>
-            {searchInput=='' ?                      
-            (species.results?.map((item, index) => {
-                let myLink = item.url;
-                let myIndex = myLink.lastIndexOf('/', myLink.lastIndexOf('/')-1);
-                let myNum = myLink.slice(myIndex);
-                let count = myNum.slice(1, myNum.length-1);
-                return <div key={index} className='character'>
-                    <Link className='characterName' to={`/species/`+`${count}`}>{item?.name}</Link>
+                <div className='characters'>
+                    {searchInput=='' ?                      
+                    (species.results?.map((item, index) => {
+                        let myLink = item.url;
+                        let myIndex = myLink.lastIndexOf('/', myLink.lastIndexOf('/')-1);
+                        let myNum = myLink.slice(myIndex);
+                        let count = myNum.slice(1, myNum.length-1);
+                        return <div key={index} className='character'>
+                            <Link className='characterName' to={`/species/`+`${count}`}>{item?.name}</Link>
+                        </div>
+                    })) :
+                    (searchOutput.map((item, index) => {
+                        let count = 0;
+                        let myLink = item.url;
+                        let myIndex = myLink.lastIndexOf('/', myLink.lastIndexOf('/')-1);
+                        let myNum = myLink.slice(myIndex);
+                        count = myNum.slice(1, myNum.length-1);             
+                        return <div key={index} className='character'>
+                            <Link className='characterName' to={`/species/`+`${count}`}>{item?.name}</Link>
+                        </div>
+                    }))
+                    }
                 </div>
-            })) :
-            (searchOutput.map((item, index) => {
-                let count = 0;
-                let myLink = item.url;
-                let myIndex = myLink.lastIndexOf('/', myLink.lastIndexOf('/')-1);
-                let myNum = myLink.slice(myIndex);
-                count = myNum.slice(1, myNum.length-1);             
-                return <div key={index} className='character'>
-                    <Link className='characterName' to={`/species/`+`${count}`}>{item?.name}</Link>
-                </div>
-            }))
-            }
-        </div>
-        <Buttons myArray = {species} urlId = {urlId} setUrlId = {setUrlId}/>
-        </main>
+                <Buttons myArray = {species} urlId = {urlId} setUrlId = {setUrlId}/>
+            </div>
+        </section>
     )
 }
 

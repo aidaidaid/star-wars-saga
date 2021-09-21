@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import '../../characters/characterCards/index.css';
-import {Link} from "react-router-dom";
+import '../../../index.css';
+import { insertData } from "../../../services";
 
 const StarshipCards = ({ charactersInfo, match, location }) => {
     let [starshipInfo, setStarshipInfo] = useState([]);
@@ -9,19 +9,9 @@ const StarshipCards = ({ charactersInfo, match, location }) => {
     let [starshipFilms, setStarshipFilms] = useState([]);
     let [starshipFilmsUrl, setStarshipFilmsUrl] = useState([]);
 
-    let count = match?.params?.starshipId;
-    console.log(count)
     const getStarshipInfo = async () => {
-        let starshipInfo = await fetch(`https://swapi.dev/api/starships/` + `${count}` + `/?format=json`)
+        const starshipInfo = await fetch(`https://swapi.dev/api/starships/` + `${match?.params?.starshipId}` + `/?format=json`)
         .then((data) => data.json()).catch((e) => console.error(e))
-        console.log('af',starshipInfo)
-        if (starshipInfo.detail == 'Not found') {
-            count = parseInt(count) + 1;
-            getStarshipInfo();
-            // let starshipInfo = await fetch(`https://swapi.dev/api/starships/` + `${match?.params?.starshipId}` + `/?format=json`)
-            // .then((data) => data.json()).catch((e) => console.error(e))
-        }
-        console.log('afff',starshipInfo)
         setStarshipInfo(starshipInfo);
         setStarshipCharactersUrl(starshipInfo?.pilots);
         setStarshipFilmsUrl(starshipInfo?.films);
@@ -60,7 +50,7 @@ const StarshipCards = ({ charactersInfo, match, location }) => {
 
     return ( 
         
-        <div className='characterInfo'>
+        <div className='info'>
             <p>Name: {starshipInfo.name}</p>
             <p>Model: {starshipInfo.model}</p>
             <p>Manufacturer: {starshipInfo.manufacturer}</p>
@@ -74,26 +64,8 @@ const StarshipCards = ({ charactersInfo, match, location }) => {
             <p>Hyperdrive rating: {starshipInfo.hyperdrive_rating}</p>
             <p>MGLT: {starshipInfo.MGLT}</p>
             <p>Starship class: {starshipInfo.starship_class}</p>
-            <p>Pilots: <span>{starshipCharacters?.map((item, index)=>{
-                if (index == starshipCharacters.length-1) {
-                return <span key={index} className='character'>
-                    <Link className='characterName characterNameInline' to={`/characters/`+`${index}`}>{item}</Link></span>
-                } else {
-                    return <span key={index} className='character'>
-                        <Link className='characterName characterNameInline' to={`/characters/`+`${index}`}>{item+','}</Link></span>
-                }
-            })
-            }</span></p>
-            <p>Films: <span>{starshipFilms?.map((item, index)=>{
-                if (index == starshipFilms.length-1) {
-                return <span key={index} className='character'>
-                    <Link className='characterName characterNameInline' to={`/characters/`+`${index}`}>{item}</Link></span>
-                } else {
-                    return <span key={index} className='character'>
-                        <Link className='characterName characterNameInline' to={`/characters/`+`${index}`}>{item+','}</Link></span>
-                }
-            })
-            }</span></p>
+            <p>Pilots: <span>{insertData(starshipCharacters)}</span></p>
+            <p>Films: <span>{insertData(starshipFilms)}</span></p>
         </div>
     )
 }

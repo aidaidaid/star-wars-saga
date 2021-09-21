@@ -1,19 +1,13 @@
 import React from "react";
-import '../home/index.css';
+import '../../index.css';
+import mainPhoto from '../../assets/main-photo.png';
 
 const Home = () => {
 
     return (
-        // <div className='container'>
-        //     {/* <iframe src='https://www.youtube.com/watch?v=8Qn_spdM5Zg'
-        //         frameBorder='0'
-        //         allow='autoplay; encrypted-media'
-        //         allowFullScreen
-        //         title='video'
-        //     /> */}
-        // </div>
-        <iframe width="100%" height="600px" src="https://www.youtube.com/embed/8Qn_spdM5Zg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-       
+        <section className='container'>
+            <img className='mainPhoto' src={mainPhoto} alt='star wars' />
+        </section>      
     )
 }
 

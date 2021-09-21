@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  /* background-color: red; */
+  background-color: #000;
 }
 
 .App {
@@ -11,13 +11,6 @@ body {
   height: 40vmin;
   pointer-events: none;
 }
-
-/* main {
-  max-height: 100vh;
-  display: flex;
-  flex-direction: column;
-} */
-
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {

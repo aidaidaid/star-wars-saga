@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
-import '../../characters/characterCards/index.css';
-import {Link} from "react-router-dom";
+import '../../../index.css';
+import { insertData } from "../../../services";
 
-const SpecieCards = ({ charactersInfo, match, location }) => {
+const SpecieCards = ({match}) => {
     const [specieInfo, setSpecieInfo] = useState([]);
     const [specieCharacters, setSpecieCharacters] = useState([]);
     const [specieCharactersUrl, setSpecieCharactersUrl] = useState([]);
     const [specieFilms, setSpecieFilms] = useState([]);
     const [specieFilmsUrl, setSpecieFilmsUrl] = useState([]);
-
 
     const getSpecieInfo = async () => {
         const specieInfo = await fetch(`https://swapi.dev/api/species/` + `${match?.params?.specieId}` + `/?format=json`)
@@ -22,7 +21,7 @@ const SpecieCards = ({ charactersInfo, match, location }) => {
         specieCharactersUrl?.forEach(async(item) => {
             const character = await fetch(`${item}` + `?format=json`).then((data) => data.json()).catch((e) => console.log(e));
             setSpecieCharacters(prevState => ([...prevState, character?.name]));    
-    })
+        })
     }
 
     const getFilms = async() => {
@@ -47,11 +46,10 @@ const SpecieCards = ({ charactersInfo, match, location }) => {
             getFilms();
         }     
     }, [specieFilmsUrl]);
-    
 
     return ( 
         
-        <div className='characterInfo'>
+        <div className='info'>
             <p>Name: {specieInfo.name}</p>
             <p>Classification: {specieInfo.classification}</p>
             <p>Designation: {specieInfo.designation}</p>
@@ -62,26 +60,8 @@ const SpecieCards = ({ charactersInfo, match, location }) => {
             <p>Average lifespan: {specieInfo.average_lifespan}</p>
             <p>homeworld: {specieInfo.hair_colors}</p>
             <p>Language: {specieInfo.language}</p>
-            <p>People: <span>{specieCharacters?.map((item, index)=>{
-                if (index == specieCharacters.length-1) {
-                return <span key={index} className='character'>
-                    <Link className='characterName characterNameInline' to={`/characters/`+`${index}`}>{item}</Link></span>
-                } else {
-                    return <span key={index} className='character'>
-                        <Link className='characterName characterNameInline' to={`/characters/`+`${index}`}>{item+','}</Link></span>
-                }
-            })
-            }</span></p>
-            <p>Films: <span>{specieFilms?.map((item, index)=>{
-                if (index == specieFilms.length-1) {
-                return <span key={index} className='character'>
-                    <Link className='characterName characterNameInline' to={`/characters/`+`${index}`}>{item}</Link></span>
-                } else {
-                    return <span key={index} className='character'>
-                        <Link className='characterName characterNameInline' to={`/characters/`+`${index}`}>{item+','}</Link></span>
-                }
-            })
-            }</span></p>
+            <p>People: <span>{insertData(specieCharacters)}</span></p >
+            <p>Films: <span>{insertData(specieFilms)}</span></p>
         </div>
     )
 }

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import '../characters/index.css';
-import photoOfStarships from '../../assets/starships.jpg';
+import '../../index.css';
 import {Link} from "react-router-dom";
 import Buttons from "../buttons";
 
@@ -30,39 +29,39 @@ const Starships = ({match}) => {
         })
     }, [searchInput])
 
-        return (
-            <main>
-                <img className='poster' src={photoOfStarships} alt="Logo"/>;
-                <div className='characters'>
-                
+    return (
+        <section>
+            <div className='poster starshipsImg'/>
+            <div className='transparentBlock'>       
                 <div className='search-bar'>
                     <input onChange={e=>setSearchInput(e.target.value)} type='text' placeholder='Search'/>
                 </div>
-                {searchInput=='' ?                      
-                (starships.results?.map((item, index) => {
-                    let myLink = item.url;
-                    let myIndex = myLink.lastIndexOf('/', myLink.lastIndexOf('/')-1);
-                    let myNum = myLink.slice(myIndex);
-                    let count = myNum.slice(1, myNum.length-1);
-                    return <div key={index} className='character'>
-                        <Link className='characterName' to={`/starships/`+`${count}`}>{item?.name}</Link>
-                    </div>
-                })) :
-                (searchOutput.map((item, index) => {
-                    let count = 0;
-                    let myLink = item.url;
-                    let myIndex = myLink.lastIndexOf('/', myLink.lastIndexOf('/')-1);
-                    let myNum = myLink.slice(myIndex);
-                    count = myNum.slice(1, myNum.length-1);             
-                    return <div key={index} className='character'>
-                        <Link className='characterName' to={`/starships/`+`${count}`}>{item?.name}</Link>
-                    </div>
-                }))
-                }
-
-        </div>
-        <Buttons myArray = {starships} urlId = {urlId} setUrlId = {setUrlId}/>
-        </main>
+                <div className='characters'> 
+                    {searchInput=='' ?                      
+                    (starships.results?.map((item, index) => {
+                        let myLink = item.url;
+                        let myIndex = myLink.lastIndexOf('/', myLink.lastIndexOf('/')-1);
+                        let myNum = myLink.slice(myIndex);
+                        let count = myNum.slice(1, myNum.length-1);
+                        return <div key={index} className='character'>
+                            <Link className='characterName' to={`/starships/`+`${count}`}>{item?.name}</Link>
+                        </div>
+                    })) :
+                    (searchOutput.map((item, index) => {
+                        let count = 0;
+                        let myLink = item.url;
+                        let myIndex = myLink.lastIndexOf('/', myLink.lastIndexOf('/')-1);
+                        let myNum = myLink.slice(myIndex);
+                        count = myNum.slice(1, myNum.length-1);             
+                        return <div key={index} className='character'>
+                            <Link className='characterName' to={`/starships/`+`${count}`}>{item?.name}</Link>
+                        </div>
+                    }))
+                    }
+                </div>
+                <Buttons myArray = {starships} urlId = {urlId} setUrlId = {setUrlId}/>
+            </div>
+        </section>
     )
 }
 

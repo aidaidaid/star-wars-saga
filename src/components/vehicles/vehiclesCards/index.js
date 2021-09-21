@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
-import '../../characters/characterCards/index.css';
-import {Link} from "react-router-dom";
+import '../../../index.css';
+import { insertData } from "../../../services";
 
-const VehicleCards = ({ charactersInfo, match, location }) => {
+const VehicleCards = ({match}) => {
     const [vehicleInfo, setVehicleInfo] = useState([]);
     const [vehicleCharacters, setVehicleCharacters] = useState([]);
     const [vehicleCharactersUrl, setVehicleCharactersUrl] = useState([]);
     const [vehicleFilms, setVehicleFilms] = useState([]);
     const [vehicleFilmsUrl, setVehicleFilmsUrl] = useState([]);
-
 
     const getSpecieInfo = async () => {
         const vehicleInfo = await fetch(`https://swapi.dev/api/vehicles/` + `${match?.params?.vehicleId}` + `/?format=json`)
@@ -51,7 +50,7 @@ const VehicleCards = ({ charactersInfo, match, location }) => {
 
     return ( 
         
-        <div className='characterInfo'>
+        <div className='info'>
             <p>Name: {vehicleInfo.name}</p>
             <p>Model: {vehicleInfo.model}</p>
             <p>Manufacturer: {vehicleInfo.manufacturer}</p>
@@ -64,26 +63,8 @@ const VehicleCards = ({ charactersInfo, match, location }) => {
             <p>Cargo capacity: {vehicleInfo.cargo_capacity}</p>
             <p>Consumables: {vehicleInfo.consumables}</p>
             <p>Vehicle class: {vehicleInfo.vehicle_class}</p>
-            <p>Pilots: <span>{vehicleCharacters?.map((item, index)=>{
-                if (index == vehicleCharacters.length-1) {
-                return <span key={index} className='character'>
-                    <Link className='characterName characterNameInline' to={`/characters/`+`${index}`}>{item}</Link></span>
-                } else {
-                    return <span key={index} className='character'>
-                        <Link className='characterName characterNameInline' to={`/characters/`+`${index}`}>{item+','}</Link></span>
-                }
-            })
-            }</span></p>
-            <p>Films: <span>{vehicleFilms?.map((item, index)=>{
-                if (index == vehicleFilms.length-1) {
-                return <span key={index} className='character'>
-                    <Link className='characterName characterNameInline' to={`/characters/`+`${index}`}>{item}</Link></span>
-                } else {
-                    return <span key={index} className='character'>
-                        <Link className='characterName characterNameInline' to={`/characters/`+`${index}`}>{item+','}</Link></span>
-                }
-            })
-            }</span></p>
+            <p>Pilots: <span>{insertData(vehicleCharacters)}</span></p>
+            <p>Films: <span>{insertData(vehicleFilms)}</span></p>
         </div>
     )
 }
