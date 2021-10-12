@@ -21,7 +21,6 @@ const Vehicles = ({match}) => {
 
     useEffect(()=>{
         setSearchOutput([]);
-        console.log('output',searchOutput)
         vehicles.results?.filter(val=>{
             if(val.name.toLowerCase().includes(searchInput.toLowerCase()))
             setSearchOutput(searchOutput=>[...searchOutput, val])

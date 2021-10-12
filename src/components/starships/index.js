@@ -12,7 +12,6 @@ const Starships = ({match}) => {
     const getStarships = async(url) => {
         const response = await fetch(url).then((data)=>data.json()).catch((e) => console.error(e));
         setStarships(response);
-        console.log('ua',response) 
         localStorage.setItem('urlId', urlId);
     }
 
@@ -22,7 +21,6 @@ const Starships = ({match}) => {
 
     useEffect(()=>{
         setSearchOutput([]);
-        console.log('output',searchOutput)
         starships.results?.filter(val=>{
             if(val.name.toLowerCase().includes(searchInput.toLowerCase()))
             setSearchOutput(searchOutput=>[...searchOutput, val])

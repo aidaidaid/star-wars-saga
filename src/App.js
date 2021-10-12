@@ -3,10 +3,10 @@ import React from 'react';
 import {BrowserRouter as Router, Route} from "react-router-dom";
 import Header from './components/header';
 import Home from './components/home';
-import Characters from './components/characters';
-import CharacterCards from './components/characters/characterCards';
-import Planets from './components/planets';
-import PlanetCards from './components/planets/planetCards';
+// import Characters from '';
+// import CharacterCards from './components/characters/characterCards';
+import Planets from './screens/planets';
+import PlanetCards from './screens/planets/planetCard';
 import Films from './components/films';
 import FilmCards from './components/films/filmsCards';
 import Species from './components/species';
@@ -15,10 +15,11 @@ import Vehicles from './components/vehicles';
 import VehicleCards from './components/vehicles/vehiclesCards';
 import Starships from './components/starships';
 import StarshipCards from './components/starships/starshipsCards';
+import Characters from './screens/characters';
+import CharacterCards from './screens/characters/characterCard';
 class App extends React.Component{
   constructor(props){
     super(props);
-    //jhjhj
   }
 
   render(){
