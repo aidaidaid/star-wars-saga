@@ -1,0 +1,10 @@
+// export const selectCharacters = (state) => state.characters.data;
+export const selectList = (state) => state.detailInfo.list;
+export const selectDetailInfo = (state) => state.detailInfo.data;
+export const selectLinksFilms = (state) => state.detailInfo.filmsArr;
+export const selectLinksSpecies = (state) => state.detailInfo.speciesArr;
+export const selectLinksVehicles = (state) => state.detailInfo.vehiclesArr;
+export const selectLinksResidents = (state) => state.detailInfo.residentsArr;
+export const selectLinksCharacters = (state) => state.detailInfo.charactersArr;
+export const selectLinksPlanets = (state) => state.detailInfo.planetsArr;
+export const selectLinksStarships = (state) => state.detailInfo.starshipsArr;

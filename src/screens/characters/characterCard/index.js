@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import '../../../index.css';
-import { selectCharacterFilms, selectCharacterSpecies, selectCharacterInfo, selectCharacterVehicles } from "../../../redux/characters/selectors";
+// import { selectCharacterFilms, selectCharacterSpecies, selectCharacterInfo, selectCharacterVehicles } from "../../../redux/characters/selectors";
+import { selectDetailInfo, selectLinksFilms, selectLinksSpecies, selectLinksVehicles } from '../../../redux/selectors';
 import { setCharacterFilmsSaga, setCharacterInfo, setCharacterInfoLinks, setCharacterSpecies, setCharacterSpeciesSaga, setCharacterVehiclesSaga } from "../../../saga/characters/actions";
 
 import { insertData } from "../../../services";
 
 const CharacterCards = ({match}) => {
     const dispatch = useDispatch();
-    const characterInfo = useSelector(selectCharacterInfo);
-    const characterFilms = useSelector(selectCharacterFilms);
-    const characterSpecies = useSelector(selectCharacterSpecies);
-    const characterVehicles = useSelector(selectCharacterVehicles);
+    const characterInfo = useSelector(selectDetailInfo);
+    const characterFilms = useSelector(selectLinksFilms);
+    const characterSpecies = useSelector(selectLinksSpecies);
+    const characterVehicles = useSelector(selectLinksVehicles);
     
     useEffect(() => {
         dispatch(setCharacterInfo(match?.params?.charId));

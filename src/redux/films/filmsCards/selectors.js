@@ -1,1 +1,0 @@
-export const selectFilmInfo = (state) => state.filmInfo.data;

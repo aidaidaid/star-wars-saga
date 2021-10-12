@@ -1,19 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import '../../../index.css';
-import { selectCharacterSpecies, selectCharacterInfo, selectCharacterVehicles } from "../../../redux/characters/selectors";
-import { selectPlanetFilms, selectPlanetInfo, selectPlanetResidents } from "../../../redux/planets/selectors";
-import { setCharacterFilmsSaga, setCharacterInfo, setCharacterInfoLinks, setCharacterSpecies, setCharacterSpeciesSaga, setCharacterVehiclesSaga } from "../../../saga/characters/actions";
+import { selectDetailInfo, selectLinksFilms, selectLinksResidents } from '../../../redux/selectors';
 import { setPlanetFilmsSaga, setPlanetInfo, setPlanetResidentsSaga } from "../../../saga/planets/actions";
 import { insertData } from "../../../services";
 
 const PlanetCards = ({match}) => {
 
     const dispatch = useDispatch();
-    const planetInfo = useSelector(selectPlanetInfo);
-    const planetFilms = useSelector(selectPlanetFilms);
-    debugger;
-    const planetResidents = useSelector(selectPlanetResidents);
+    const planetInfo = useSelector(selectDetailInfo);
+    const planetFilms = useSelector(selectLinksFilms);
+    const planetResidents = useSelector(selectLinksResidents);
     
     useEffect(() => {
         dispatch(setPlanetInfo(match?.params?.planetId));

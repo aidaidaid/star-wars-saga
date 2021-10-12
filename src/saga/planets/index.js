@@ -1,5 +1,5 @@
 import { takeEvery, call, put, select, spawn, take } from "redux-saga/effects";
-import { setPlanetFilms, setPlanetInfoData, setPlanetsData, setPlanetsResidents } from "../../redux/planets/actions";
+import { setList, setInfoData, setLinksFilms, setLinksResidents } from "../../redux/actions";
 import { types } from "./actionTypes";
 
 const getPlanets = async(url) => {
@@ -9,7 +9,7 @@ const getPlanets = async(url) => {
 
 function* planetsWorker (action) {
     const result = yield call(getPlanets, `https://swapi.dev/api/planets/?page=${action.payload}&format=json`);
-    yield put(setPlanetsData(result));
+    yield put(setList(result));
 };
 
 export function* planetsWatcher () {
@@ -28,25 +28,23 @@ const getPlanetLinks = async(links) => {
     }))
 }
 
-function* planetInfoWorker (action) {
-    debugger;    
+function* planetInfoWorker (action) { 
     const result = yield call(getPlanetInfo, `https://swapi.dev/api/planets/` + `${action.payload}` + `/?format=json`);
-    yield put(setPlanetInfoData(result));
+    yield put(setInfoData(result));
     yield spawn(characterLinksWatcher)
 };
 
 function* planetFilmsWorker(action) {
     const films = yield call(getPlanetLinks, action.payload);
-    yield put(setPlanetFilms(films));
+    yield put(setLinksFilms(films));
 }
 
 function* planetResidentsWorker(action) {
     const residents = yield call(getPlanetLinks, action.payload);
-    yield put(setPlanetsResidents(residents));
+    yield put(setLinksResidents(residents));
 }
 
 export function* planetInfoWatcher () {
-    // debugger;
     yield takeEvery(types.SET_PLANET_INFO, planetInfoWorker);
 };
 

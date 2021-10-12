@@ -2,36 +2,36 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { selectList } from "../../redux/selectors";
-import { setPlanets } from "../../saga/planets/actions";
 import Buttons from "../../components/buttons";
+import { setStarships } from "../../saga/starships/actions";
 
-const Planets = () => {
+const Vehicles = () => {
   const dispatch = useDispatch();
-  const planets = useSelector(selectList);
+  const vehicles = useSelector(selectList);
 
   const [urlId, setUrlId] = useState(1);
   const [searchInput, setSearchInput] = useState('');
   const [searchOutput, setSearchOutput] = useState([]);
 
   const previousPage = () => {
-    if (planets.previous !== null) {
+    if (vehicles.previous !== null) {
       setUrlId(urlId-1);
     }
   }
 
   const nextPage = () => {
-    if (planets.next !== null) {
+    if (vehicles.next !== null) {
       setUrlId(urlId+1);
     }
   }
 
   useEffect(() => {
-    dispatch(setPlanets(urlId));
+    dispatch(setStarships(urlId));
   }, [urlId]);
 
     useEffect(()=>{
         setSearchOutput([]);
-        planets.results?.filter(val=>{
+        vehicles.results?.filter(val=>{
             if(val.name.toLowerCase().includes(searchInput.toLowerCase()))
             setSearchOutput(searchOutput=>[...searchOutput, val])
         })
@@ -39,20 +39,20 @@ const Planets = () => {
 
   return (
     <section>
-            <div className='poster planetsImg'/>
+            <div className='poster vehiclesImg'/>
             <div className='transparentBlock'>
                 <div className='search-bar'>
                     <input onChange={e=>setSearchInput(e.target.value)} type='text' placeholder='Search'/>
                 </div>
                 <div className='characters'>              
                     {searchInput=='' ?                                  
-                    (planets?.results?.map((item, index) => {
+                    (vehicles?.results?.map((item, index) => {
                         let myLink = item.url;
                         let myIndex = myLink.lastIndexOf('/', myLink.lastIndexOf('/')-1);
                         let myNum = myLink.slice(myIndex);
                         let count = myNum.slice(1, myNum.length-1);
                         return <div key={index} className='character'>
-                            <Link className='characterName' to={`/planets/`+`${count}`}>{item?.name}</Link>
+                            <Link className='characterName' to={`/vehicles/`+`${count}`}>{item?.name}</Link>
                         </div>
                     })) :
                     (searchOutput.map((item, index) => {
@@ -62,7 +62,7 @@ const Planets = () => {
                         let myNum = myLink.slice(myIndex);
                         count = myNum.slice(1, myNum.length-1);             
                         return <div key={index} className='character'>
-                            <Link className='characterName' to={`/planets/`+`${count}`}>{item?.name}</Link>
+                            <Link className='characterName' to={`/vehicles/`+`${count}`}>{item?.name}</Link>
                         </div>
                     }))
                     }
@@ -77,4 +77,4 @@ const Planets = () => {
   );
 };
 
-export default Planets;
+export default Vehicles;

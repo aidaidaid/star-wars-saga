@@ -5,12 +5,14 @@ import characters from "./characters/reducer";
 import characterInfo from "./characters/reducerInfo";
 import planets from './planets/reducer';
 import planetInfo from './planets/reducerInfo';
+import detailInfo from './reducerInfo'
 
 const reducer = combineReducers({
-    characters,
-    characterInfo,
-    planets,
-    planetInfo,
+    // characters,
+    // characterInfo,
+    // planets,
+    // planetInfo,
+    detailInfo,
 });
 
 const sagaMiddleware = createSagaMiddleware();
