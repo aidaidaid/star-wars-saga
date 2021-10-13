@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import '../../../index.css';
-// import { selectPlanetFilms, selectPlanetInfo, selectPlanetResidents } from "../../../redux/planets/selectors";
 import { selectDetailInfo, selectLinksCharacters, selectLinksPlanets, selectLinksSpecies, selectLinksStarships, selectLinksVehicles } from '../../../redux/selectors';
-import { setCharacterFilmsSaga, setCharacterInfo, setCharacterInfoLinks, setCharacterSpecies, setCharacterSpeciesSaga, setCharacterVehiclesSaga } from "../../../saga/characters/actions";
-import { setFilmCharactersSaga, setFilmInfo, setFilmPlanetsSaga, setFilms, setFilmSpeciesSaga, setFilmStarshipsSaga, setFilmVehiclesSaga } from "../../../saga/films/actions";
+import { setFilmInfo, setFilmCharactersSaga, setFilmPlanetsSaga, setFilmSpeciesSaga, setFilmStarshipsSaga, setFilmVehiclesSaga } from "../../../saga/films/actions";
 import { insertData } from "../../../services";
 
 const FilmCards = ({match}) => {

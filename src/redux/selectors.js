@@ -1,4 +1,3 @@
-// export const selectCharacters = (state) => state.characters.data;
 export const selectList = (state) => state.detailInfo.list;
 export const selectDetailInfo = (state) => state.detailInfo.data;
 export const selectLinksFilms = (state) => state.detailInfo.filmsArr;

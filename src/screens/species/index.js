@@ -13,18 +13,6 @@ const Species = () => {
   const [searchInput, setSearchInput] = useState('');
   const [searchOutput, setSearchOutput] = useState([]);
 
-  const previousPage = () => {
-    if (species.previous !== null) {
-      setUrlId(urlId-1);
-    }
-  }
-
-  const nextPage = () => {
-    if (species.next !== null) {
-      setUrlId(urlId+1);
-    }
-  }
-
   useEffect(() => {
     dispatch(setSpecies(urlId));
   }, [urlId]);
@@ -32,7 +20,7 @@ const Species = () => {
   useEffect(()=>{
       setSearchOutput([]);
       species.results?.filter(val=>{
-          if(val.name.toLowerCase().includes(searchInput.toLowerCase()))
+          if(searchInput && val.name.toLowerCase().includes(searchInput.toLowerCase()))
           setSearchOutput(searchOutput=>[...searchOutput, val])
       })
   }, [searchInput])
@@ -67,11 +55,7 @@ const Species = () => {
                     }))
                     }
                 </div>
-                <div className='listBtns'>
-                    <button className='previous listBtn' onClick={previousPage}>&#8678;</button> 
-                    <button className='next listBtn' onClick={nextPage}>&#8680;</button> 
-                </div>
-                {/* <Buttons myArray = {characters} urlId = {urlId} setUrlId = {setUrlId}/> */}
+                <Buttons myArray = {species} urlId = {urlId} setUrlId = {setUrlId}/>   
             </div>
         </section>
   );

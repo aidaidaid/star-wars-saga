@@ -23,6 +23,13 @@ function detailInfo (state = initialState, action) {
             return{
                 ...state,
                 data: action.payload,
+                filmsArr: [],
+                speciesArr: [],
+                vehiclesArr: [],
+                residentsArr: [],
+                charactersArr: [],
+                planetsArr: [],
+                starshipsArr: [],
             }
         case types.SET_LINKS_FILMS:
             return{

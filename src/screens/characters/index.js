@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-// import { selectCharacterFilms, selectCharacters } from "../../redux/characters/selectors";
 import { selectList } from "../../redux/selectors";
 import { setCharacters } from "../../saga/characters/actions";
 import Buttons from "../../components/buttons";
@@ -14,29 +13,17 @@ const Characters = () => {
   const [searchInput, setSearchInput] = useState('');
   const [searchOutput, setSearchOutput] = useState([]);
 
-  const previousPage = () => {
-    if (characters.previous !== null) {
-      setUrlId(urlId-1);
-    }
-  }
-
-  const nextPage = () => {
-    if (characters.next !== null) {
-      setUrlId(urlId+1);
-    }
-  }
-
   useEffect(() => {
     dispatch(setCharacters(urlId));
   }, [urlId]);
 
-    useEffect(()=>{
-        setSearchOutput([]);
-        characters.results?.filter(val=>{
-            if(val.name.toLowerCase().includes(searchInput.toLowerCase()))
-            setSearchOutput(searchOutput=>[...searchOutput, val])
-        })
-    }, [searchInput])
+  useEffect(()=>{
+      setSearchOutput([]);
+      characters.results?.filter(val=>{
+        if(searchInput && val.name.toLowerCase().includes(searchInput.toLowerCase()))
+          setSearchOutput(searchOutput=>[...searchOutput, val])
+      })
+   }, [searchInput])
 
   return (
     <section>
@@ -68,11 +55,7 @@ const Characters = () => {
             }))
           }
         </div>
-        <div className='listBtns'>
-          <button className='previous listBtn' onClick={previousPage}>&#8678;</button> 
-          <button className='next listBtn' onClick={nextPage}>&#8680;</button> 
-        </div>
-        {/* <Buttons myArray = {characters} urlId = {urlId} setUrlId = {setUrlId}/> */}
+        <Buttons myArray = {characters} urlId = {urlId} setUrlId = {setUrlId}/>
       </div>
     </section>
   );

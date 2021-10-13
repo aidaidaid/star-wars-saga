@@ -1,18 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import '../../../index.css';
-// import { selectCharacterFilms, selectCharacterSpecies, selectCharacterInfo, selectCharacterVehicles } from "../../../redux/characters/selectors";
-import { selectDetailInfo, selectLinksFilms, selectLinksSpecies, selectLinksVehicles } from '../../../redux/selectors';
-import { setCharacterFilmsSaga, setCharacterInfo, setCharacterInfoLinks, setCharacterSpecies, setCharacterSpeciesSaga, setCharacterVehiclesSaga } from "../../../saga/characters/actions";
-
+import { selectDetailInfo, selectLinksFilms, selectLinksPlanets, selectLinksSpecies, selectLinksStarships, selectLinksVehicles } from '../../../redux/selectors';
+import { setCharacterFilmsSaga, setCharacterHomeworldSaga, setCharacterInfo, setCharacterSpeciesSaga, setCharacterStarshipsSaga, setCharacterVehiclesSaga } from "../../../saga/characters/actions";
 import { insertData } from "../../../services";
 
 const CharacterCards = ({match}) => {
+    
     const dispatch = useDispatch();
     const characterInfo = useSelector(selectDetailInfo);
     const characterFilms = useSelector(selectLinksFilms);
     const characterSpecies = useSelector(selectLinksSpecies);
+    const characterHomeworld = useSelector(selectLinksPlanets);
     const characterVehicles = useSelector(selectLinksVehicles);
+    const characterStarships = useSelector(selectLinksStarships);
     
     useEffect(() => {
         dispatch(setCharacterInfo(match?.params?.charId));
@@ -22,6 +23,8 @@ const CharacterCards = ({match}) => {
         dispatch(setCharacterFilmsSaga(characterInfo.films));
         dispatch(setCharacterSpeciesSaga(characterInfo.species));
         dispatch(setCharacterVehiclesSaga(characterInfo.vehicles));
+        dispatch(setCharacterStarshipsSaga(characterInfo.starships));
+        dispatch(setCharacterHomeworldSaga(characterInfo.homeworld));
     }, [characterInfo]);
 
     return (
@@ -34,11 +37,11 @@ const CharacterCards = ({match}) => {
             <p>Eye color: {characterInfo.eye_color}</p>
             <p>Birth year: {characterInfo.birth_year}</p>
             <p>Gender: {characterInfo.gender}</p>
-            {/*<p>Homeworld: {charHomeworld}</p>*/
-            <><p>Films: <span>{insertData(characterFilms)}</span></p>
+            <p>Homeworld: {insertData(characterHomeworld)}</p>
+            <p>Films: <span>{insertData(characterFilms)}</span></p>
             <p>Species: {insertData(characterSpecies)}</p>
-            <p>Vehicles: <span>{insertData(characterVehicles)}</span></p></>
-            /*<p>Starships: <span>{insertData(characterStarships)}</span></p>*/}
+            <p>Vehicles: <span>{insertData(characterVehicles)}</span></p>
+            <p>Starships: <span>{insertData(characterStarships)}</span></p>
         </div>
     )
 }

@@ -24,3 +24,13 @@ export const setCharacterVehiclesSaga = (payload) => ({
     type: types.SET_CHARACTER_VEHICLES_SAGA,
     payload,
 })
+
+export const setCharacterStarshipsSaga = (payload) => ({
+    type: types.SET_CHARACTER_STARSHIPS_SAGA,
+    payload,
+});
+
+export const setCharacterHomeworldSaga = (payload) => ({
+    type: types.SET_CHARACTER_HOMEWORLD_SAGA,
+    payload,
+})

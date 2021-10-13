@@ -7,7 +7,7 @@ const getVehicles = async(url) => {
     return response;    
 };
 
-function* starshipsWorker (action) {
+function* vehiclesWorker (action) {
     const result = yield call(getVehicles, `https://swapi.dev/api/vehicles/?page=${action.payload}&format=json`);
     yield put(setList(result));
 };
@@ -44,7 +44,7 @@ function* vehiclePilotsWorker(action) {
     yield put(setLinksCharacters(pilots));
 }
 
-export function* starshipInfoWatcher () {
+export function* vehicleInfoWatcher () {
     yield takeEvery(types.SET_VEHICLE_INFO, vehicleInfoWorker);
 };
 

@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { selectList } from "../../redux/selectors";
-import Buttons from "../../components/buttons";
 import { setStarships } from "../../saga/starships/actions";
+import Buttons from "../../components/buttons";
 
 const Starships = () => {
   const dispatch = useDispatch();
@@ -13,18 +13,6 @@ const Starships = () => {
   const [searchInput, setSearchInput] = useState('');
   const [searchOutput, setSearchOutput] = useState([]);
 
-  const previousPage = () => {
-    if (starships.previous !== null) {
-      setUrlId(urlId-1);
-    }
-  }
-
-  const nextPage = () => {
-    if (starships.next !== null) {
-      setUrlId(urlId+1);
-    }
-  }
-
   useEffect(() => {
     dispatch(setStarships(urlId));
   }, [urlId]);
@@ -32,7 +20,7 @@ const Starships = () => {
     useEffect(()=>{
         setSearchOutput([]);
         starships.results?.filter(val=>{
-            if(val.name.toLowerCase().includes(searchInput.toLowerCase()))
+            if(searchInput && val.name.toLowerCase().includes(searchInput.toLowerCase()))
             setSearchOutput(searchOutput=>[...searchOutput, val])
         })
     }, [searchInput])
@@ -67,11 +55,7 @@ const Starships = () => {
                     }))
                     }
                 </div>
-                <div className='listBtns'>
-                    <button className='previous listBtn' onClick={previousPage}>&#8678;</button> 
-                    <button className='next listBtn' onClick={nextPage}>&#8680;</button> 
-                </div>
-                {/* <Buttons myArray = {characters} urlId = {urlId} setUrlId = {setUrlId}/> */}
+                <Buttons myArray = {starships} urlId = {urlId} setUrlId = {setUrlId}/>
             </div>
         </section>
   );

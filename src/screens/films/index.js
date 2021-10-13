@@ -19,7 +19,7 @@ const Films = () => {
     useEffect(()=>{
         setSearchOutput([]);
         films.results?.filter(val=>{
-            if(val.name.toLowerCase().includes(searchInput.toLowerCase()))
+            if(searchInput && val.name.toLowerCase().includes(searchInput.toLowerCase()))
             setSearchOutput(searchOutput=>[...searchOutput, val])
         })
     }, [searchInput])
